@@ -29,59 +29,67 @@ ALTEZZA_FINE = 60
 INTERLINEA = 20
 INTERLINEA_TITOLO = 10
 
+#Posizione attuale sulla pagina (x, y)
+# (0, 0) è l'angolo inferiore sinistro
+class Cursore():
+    def __init__(self):
+        self.x = COLONNA_1
+        self.y = ALTEZZA_INIZIO - 40
+        self.prima_pagina = True
+
+cursore = Cursore()
+pdf = canvas.Canvas("Sample", pagesize = A4)
+
 def crea_report(cantiere):
-    #Creazione del file pdf
+    global pdf
     timestamp = datetime.now() 
     data = timestamp.strftime("%d-%m-%Y")
     pdf = canvas.Canvas("Report Cantiere "+ cantiere.nome + " " + data + ".pdf", pagesize = A4)
-
-    #Scrittura dell'intestazione
-    pdf.setFont("Helvetica-Bold", 16)
-    pdf.drawString(30, 750, "Report Cantiere " + cantiere.nome)
-    pdf.setFont("Helvetica", 12)
-    pdf.drawString(30, 730, data)
-
-    cursore = Cursore()
-
-    #Scrittura delle sezioni
-    cursore = stampa_titolo(cursore, "Task Completati:", pdf)
-    cursore = stampa_lista(cursore, cantiere.tasks, pdf)
-
-    cursore = stampa_titolo(cursore, "Materiali Utilizzati:", pdf)
-    cursore = stampa_dizionario(cursore, cantiere.materiali, "kg", pdf)
-
-    cursore = stampa_titolo(cursore, "Costi:", pdf)
-    cursore = stampa_dizionario(cursore, cantiere.costi, "€", pdf)
-
+    stampa_intestazione(cantiere.nome, data)
+    stampa_sezione("Task Completati:", cantiere.tasks, None)
+    stampa_sezione("Materiali utilizzati:", cantiere.materiali, "kg")
+    stampa_sezione("Costi:", cantiere.costi, "€")
     pdf.save()
 
-# Scrittura del titolo di una sezione
-def stampa_titolo(cursore, titolo, pdf):
-    pdf.setFont("Helvetica-Bold", 14)
+def stampa_intestazione(nome, data):
+    global pdf
+    pdf.setFont("Helvetica-Bold", 16)
+    pdf.drawString(COLONNA_1, ALTEZZA_INIZIO, "Report Cantiere " + nome)
+    pdf.setFont("Helvetica", 12)
+    pdf.drawString(COLONNA_1, ALTEZZA_INIZIO - 20, data)
+
+def stampa_sezione(titolo, collezione, unità):
+    stampa_titolo(titolo)
+    if isinstance(collezione, dict):
+        stampa_dizionario(collezione, unità)
+    elif isinstance(collezione, list):
+        stampa_lista(collezione)
+
+def stampa_titolo(titolo):
+    global cursore, pdf
     cursore.y -= INTERLINEA_TITOLO
+    pdf.setFont("Helvetica-Bold", 14)
     pdf.drawString(cursore.x, cursore.y, titolo)
     cursore.y -= INTERLINEA
-    return cursore
 
-def stampa_lista(cursore, lista, pdf):
+def stampa_lista(lista):
+    global cursore, pdf
     pdf.setFont("Helvetica", 12)
     for entrata in lista:
-        cursore = aggiorna_cursore(pdf, cursore)
+        aggiorna_cursore()
         pdf.drawString(cursore.x, cursore.y, "- " + entrata)
         cursore.y -= INTERLINEA
-    return cursore
 
-def stampa_dizionario(cursore, dizionario, unità, pdf):
+def stampa_dizionario(dizionario, unità):
+    global cursore, pdf
     pdf.setFont("Helvetica", 12)
     for chiave, valore in dizionario.items():
-        cursore = aggiorna_cursore(pdf, cursore)
+        aggiorna_cursore()
         pdf.drawString(cursore.x, cursore.y, f"- {chiave}: {valore}{unità}")
         cursore.y -= INTERLINEA
-    return cursore
 
-# Aggiorna il cursore quando si trova nel margine inferiore
-def aggiorna_cursore(pdf, cursore):
-
+def aggiorna_cursore():
+    global cursore, pdf
     if cursore.y <= ALTEZZA_FINE:
         if cursore.x == COLONNA_1:
             cursore.x = COLONNA_2
@@ -91,16 +99,6 @@ def aggiorna_cursore(pdf, cursore):
             cursore.x = COLONNA_1
             cursore.y = ALTEZZA_INIZIO
             cursore.prima_pagina = False
-    
-    return cursore
-
-#Posizione attuale sulla pagina (x, y)
-# (0, 0) è l'angolo inferiore sinistro
-class Cursore():
-    def __init__(self):
-        self.x = COLONNA_1
-        self.y = ALTEZZA_INIZIO - 40
-        self.prima_pagina = True
 
 class Cantiere():
     def __init__(self, nome):
@@ -132,8 +130,6 @@ class Cantiere():
     def totale_materiali(self):
         return sum(self.materiali.values())
 
-
-#main
 cantiere_sofia = Cantiere("Via Santa Sofia")
 
 for i in range(10):
