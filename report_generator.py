@@ -45,13 +45,13 @@ def crea_report(cantiere):
     timestamp = datetime.now() 
     data = timestamp.strftime("%d-%m-%Y")
     pdf = canvas.Canvas("Report Cantiere "+ cantiere.nome + " " + data + ".pdf", pagesize = A4)
-    stampa_intestazione(cantiere.nome, data)
+    stampa_titolo(cantiere.nome, data)
     stampa_sezione("Task Completati:", cantiere.tasks, None)
     stampa_sezione("Materiali utilizzati:", cantiere.materiali, "kg")
     stampa_sezione("Costi:", cantiere.costi, "€")
     pdf.save()
 
-def stampa_intestazione(nome, data):
+def stampa_titolo(nome, data):
     global pdf
     pdf.setFont("Helvetica-Bold", 16)
     pdf.drawString(COLONNA_1, ALTEZZA_INIZIO, "Report Cantiere " + nome)
@@ -59,13 +59,13 @@ def stampa_intestazione(nome, data):
     pdf.drawString(COLONNA_1, ALTEZZA_INIZIO - 20, data)
 
 def stampa_sezione(titolo, collezione, unità):
-    stampa_titolo(titolo)
+    stampa_intestazione(titolo)
     if isinstance(collezione, dict):
         stampa_dizionario(collezione, unità)
     elif isinstance(collezione, list):
         stampa_lista(collezione)
 
-def stampa_titolo(titolo):
+def stampa_intestazione(titolo):
     global cursore, pdf
     cursore.y -= INTERLINEA_TITOLO
     pdf.setFont("Helvetica-Bold", 14)
