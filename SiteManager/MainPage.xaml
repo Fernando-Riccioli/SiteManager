@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SiteManager.MainPage"
+             Title=" SiteManager">
+
+    <ScrollView>
+        <FlexLayout Wrap="Wrap" JustifyContent="Center" Margin="50">
+            <VerticalStackLayout Margin="35">
+                <Label Text="Cantieri" FontAttributes="Bold" FontFamily="bold" FontSize="Large" HorizontalOptions="Center" Margin="5" TextColor="SteelBlue"/>
+                <Button
+                    Padding="20"
+                    ImageSource="cantieri_icon.png"
+                    Clicked="CantieriPageClicked"
+                    WidthRequest="150"
+                    HeightRequest="150"
+                    BackgroundColor="SteelBlue"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Margin="35">
+                <Label Text="Operai" FontAttributes="Bold" FontFamily="bold" FontSize="Large" HorizontalOptions="Center" Margin="5" TextColor="SteelBlue"/>
+                <Button
+                    Padding="20"
+                    ImageSource="operaio_icon.png"
+                    Clicked="OperaiPageClicked"
+                    WidthRequest="150"
+                    HeightRequest="150"
+                    BackgroundColor="SteelBlue" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Margin="35">
+                <Label Text="Materiali" FontAttributes="Bold" FontFamily="bold" FontSize="Large" HorizontalOptions="Center" Margin="5" TextColor="SteelBlue"/>
+                <Button
+                    Padding="20"
+                    ImageSource="tools_icon.png"
+                    Clicked="MaterialiPageClicked"
+                    WidthRequest="150"
+                    HeightRequest="150"
+                    BackgroundColor="SteelBlue" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Margin="35">
+                <Label Text="Reporting" FontAttributes="Bold" FontFamily="bold" FontSize="Large" HorizontalOptions="Center" Margin="5" TextColor="SteelBlue"/>
+                <Button
+                    Padding="20"
+                    ImageSource="tasks_icon.png"
+                    Clicked="ReportingPageClicked"
+                    WidthRequest="150"
+                    HeightRequest="150"
+                    BackgroundColor="SteelBlue" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Margin="35">
+                <Label Text="Statistiche" FontAttributes="Bold" FontFamily="bold" FontSize="Large" HorizontalOptions="Center" Margin="5" TextColor="SteelBlue"/>
+                <Button
+                    Padding="20"
+                    ImageSource="finance_icon.png"
+                    Clicked="StatistichePageClicked"
+                    WidthRequest="150"
+                    HeightRequest="150"
+                    BackgroundColor="SteelBlue" />
+            </VerticalStackLayout>
+        </FlexLayout>
+    </ScrollView>
+
+</ContentPage>

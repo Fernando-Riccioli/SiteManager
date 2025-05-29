@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SiteManager.CantieriPage"
+             Title=" Cantieri">
+    
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <CollectionView Margin="30,0" x:Name="CantieriCollectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid RowDefinitions="auto,auto">
+                            <HorizontalStackLayout Grid.Row="0" Margin="0,10">
+                                <Label Text="Città:"/>
+                                <Label Text="{Binding Citta}" Margin="3,0" TextColor="SteelBlue" />
+                                <Label Text=" Committente:"/>
+                                <Label Text="{Binding Committente}" Margin="3,0" TextColor="SteelBlue" />
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Row="1">
+                                <Button Text="Task" Clicked="TasksCantiere_Clicked" CommandParameter="{Binding}" Margin="3" BackgroundColor="SteelBlue"/>
+                                <Button Text="Dettagli" Clicked="VisualizzaCantiere_Clicked" CommandParameter="{Binding}" Margin="3"  BackgroundColor="SteelBlue"/>
+                                <Button Text="Assegna" Clicked="GestisciCantiere_Clicked" CommandParameter="{Binding}" Margin="3" BackgroundColor="SteelBlue"/>
+                                <Button Text="Spese" Clicked="ChiusuraGiornata_Clicked" CommandParameter="{Binding}" Margin="3" BackgroundColor="SteelBlue"/>
+                                <Button Text="Modifica" Clicked="ModificaCantiere_Clicked" CommandParameter="{Binding}" Margin="3" BackgroundColor="SteelBlue"/>
+                                <Button Text="Elimina" Clicked="EliminaCantiere_Clicked" CommandParameter="{Binding}" Margin="3" BackgroundColor="SteelBlue"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+   
+        <StackLayout Grid.Row="1" Margin="30,30">
+            <Button 
+                x:Name="NuovoCantiereBtn"
+                Text="Nuovo cantiere" 
+                Clicked="AggiungiCantiere_Clicked"
+                IsVisible="True"
+                BackgroundColor="SteelBlue"
+                HorizontalOptions="Center"/>
+
+            <StackLayout x:Name="FormStackLayout" IsVisible="False" Spacing="10">
+                <Entry x:Name="CittaEntry" Placeholder="Città" />
+                <Entry x:Name="CommittenteEntry" Placeholder="Committente" />
+                <Label Text="Data inizio cantiere:" />
+                <DatePicker x:Name="DataInizioPicker"/>
+                <Label Text="Scadenza cantiere:" />
+                <DatePicker x:Name="ScadenzaPicker"/>
+                <Button x:Name="SalvaCantiereBtn" Text="Salva" Clicked="SalvaCantiere_Clicked" IsVisible="False" BackgroundColor="SteelBlue" HorizontalOptions="Center"/>
+                <Button x:Name="AggiornaCantiereBtn" Text="Aggiorna" Clicked="AggiornaCantiere_Clicked" IsVisible="False" BackgroundColor="SteelBlue" HorizontalOptions="Center"/>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentPage>

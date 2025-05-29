@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SiteManager.ChiusuraGiornataPage"
+             Title=" Chiusura Giornata">
+    
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView Grid.Row="0">
+            <CollectionView Margin="20,0" x:Name="OperaiCollectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="*,auto" Padding="5">
+                            <HorizontalStackLayout Grid.Column="0" VerticalOptions="Center">
+                                <Label Text="Nome:"/>
+                                <Label Text="{Binding Nome}" Margin="5,0" TextColor="SteelBlue"/>
+                                <Label Text="Cognome:"/>
+                                <Label Text="{Binding Cognome}" Margin="5,0" TextColor="SteelBlue"/>
+                                <Label Text="Mansione:"/>
+                                <Label Text="{Binding Mansione}" Margin="5,0" TextColor="SteelBlue"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout Grid.Column="1">
+                                <Button Text="Ore lavorate" Clicked="OreLavorate_Clicked" BackgroundColor="SteelBlue"/>
+                            </HorizontalStackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+        
+        <StackLayout Grid.Row="1" Margin="30,30">
+            <Button
+                x:Name="AggiungiSpesaBtn"
+                Text="Aggiungi spesa" 
+                IsVisible="True"
+                Clicked="AggiungiSpesa_Clicked" 
+                BackgroundColor="SteelBlue"
+                HorizontalOptions="Center"/>
+            
+            <StackLayout x:Name="FormStackLayout" IsVisible="False" Spacing="10">
+                <Entry x:Name="DescrizioneEntry" Placeholder="Descrizione" />
+                <Entry x:Name="CostoEntry" Placeholder="Costo" />
+                <Button x:Name="SalvaSpesaBtn" Text="Salva" Clicked="SalvaSpesa_Clicked" IsVisible="False" BackgroundColor="SteelBlue" HorizontalOptions="Center"/>
+            </StackLayout>
+        </StackLayout>
+    </Grid>
+</ContentPage>

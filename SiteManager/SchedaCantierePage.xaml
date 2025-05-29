@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"  
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+            x:Class="SiteManager.SchedaCantierePage"  
+            Title="Scheda Cantiere">
+    
+    <Grid RowDefinitions="auto,*,auto,*">  
+       <Label Text="Elenco Operai:" Grid.Row="0" Margin="20,5" FontSize="20" TextColor="SteelBlue"/>  
+       <CollectionView x:Name="OperaiCollectionView" Grid.Row="1" Margin="20,0">  
+           <CollectionView.ItemTemplate>  
+               <DataTemplate>  
+                   <Grid ColumnDefinitions="*,auto" BackgroundColor="{Binding BackgroundColor}">
+                       <HorizontalStackLayout Grid.Column="0" VerticalOptions="Center">  
+                           <Label Text="Nome:" />  
+                           <Label Text="{Binding Nome}" Margin="5,0" TextColor="SteelBlue"/>  
+                           <Label Text="Cognome:" />  
+                           <Label Text="{Binding Cognome}" Margin="5,0" TextColor="SteelBlue"/>  
+                           <Label Text="Mansione:" />
+                           <Label Text="{Binding Mansione}" Margin="5,0" TextColor="SteelBlue"/>
+                       </HorizontalStackLayout>   
+                       <HorizontalStackLayout Grid.Column="1">  
+                           <Button Text="Assegna" Clicked="AssegnaOperaio_Clicked" CommandParameter="{Binding}" Margin="3" BackgroundColor="SteelBlue"/>  
+                           <Button Text="Rimuovi" Clicked="RimuoviOperaio_Clicked" CommandParameter="{Binding}" Margin="3" BackgroundColor="SteelBlue"/>  
+                       </HorizontalStackLayout>
+                   </Grid>  
+               </DataTemplate>  
+           </CollectionView.ItemTemplate>  
+       </CollectionView>  
+         
+       <Label Text="Elenco Materiali:" Grid.Row="2" Margin="20,5" FontSize="20" TextColor="SteelBlue"/>  
+       <CollectionView x:Name="MaterialiCollectionView" Grid.Row="3" Margin="20,0">  
+           <CollectionView.ItemTemplate>  
+               <DataTemplate>  
+                   <Grid ColumnDefinitions="*,auto" >
+                       <HorizontalStackLayout Grid.Column="0" VerticalOptions="Center">  
+                           <Label Text="Nome: " />  
+                           <Label Text="{Binding Nome}" Margin="5,0" TextColor="SteelBlue"/>  
+                           <Label Text="Quantità: "/>  
+                           <Label Text="{Binding Quantita}" Margin="5,0,0,0" TextColor="SteelBlue"/>
+                           <Label Text="{Binding Unita}" TextColor="SteelBlue"/>
+                       </HorizontalStackLayout>  
+                       <HorizontalStackLayout Grid.Column="1" >
+                           <Button Text="Assegna" Clicked="AssegnaMateriale_Clicked" CommandParameter="{Binding}" Margin="3" BackgroundColor="SteelBlue"/>
+                        </HorizontalStackLayout>  
+                   </Grid>  
+               </DataTemplate>  
+           </CollectionView.ItemTemplate>  
+       </CollectionView>  
+   </Grid>  
+    
+</ContentPage>
