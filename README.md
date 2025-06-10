@@ -2,7 +2,7 @@
 - Fernando Riccioli
 - Daniele Lucifora
 
-# Descrizione
+## Descrizione
 SiteManager è un'applicazione multi-piattaforma sviluppata in **C#**, **C++** e **Python** per la gestione efficiente dei cantieri edili. Offre un'interfaccia grafica intuitiva e funzionalità avanzate di analisi dei dati.
 
 ## Funzionalità Principali
